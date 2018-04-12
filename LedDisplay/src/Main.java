@@ -3,11 +3,13 @@ public class Main {
     Form form;
     Display display;
     int width=1200;
+    int ledCountToHeight=10;
     int endPixselDisplay;
-    int[][] ledDisp=new int[60][10];
+    int[][] ledDisp=new int[60][ledCountToHeight];
     int height;
     public Main(){
-        setFont('A');
+        StringParseToMatrix stringParseToMatrix=new StringParseToMatrix("salam Necesen",ledCountToHeight);
+        viewMatrix(stringParseToMatrix.getMatrix());
         endPixselDisplay=(width/ledDisp.length)*ledDisp[0].length;
         height=endPixselDisplay+120;
         form=new Form(width,height);
@@ -20,6 +22,7 @@ public class Main {
     public static void main(String[] args) {
         new Main();
     }
+    
     private void setFont(char c){
         for (int i=0;i<ledDisp.length;i++){
             for(int j=0;j<ledDisp[0].length;j++) {
@@ -30,5 +33,17 @@ public class Main {
                 }
             }
             }
+    }
+    private void viewMatrix( int[][] matrix){
+        for (int i=0;i<ledDisp.length;i++){
+            for(int j=0;j<ledDisp[0].length;j++) {
+                if(i<matrix[0].length){
+                    ledDisp[i][j] = matrix[j][i];
+                }else{
+                    ledDisp[i][j]=0;
+                
+                }
+            }
+        }
     }
 }
